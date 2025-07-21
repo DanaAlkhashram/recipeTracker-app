@@ -6,7 +6,10 @@ const morgan = require('morgan')
 const mongoose = require('mongoose')
 const session = require('express-session')
 const MongoStore = require('connect-mongo')
+const path = require('path')
+
 const authController = require('./controllers/auth.controller')
+const listingsController = require('./controllers/listings.controller')
 const isSignedIn = require('./middleware/is-signed-in')
 const passUserToView = require('./middleware/pass-user-to-view')
 
@@ -20,6 +23,7 @@ mongoose.connection.on('connected', () => {
 app.use(express.urlencoded({ extended: false }))
 app.use(methodOverride('_method'))
 app.use(morgan('dev'))
+app.use(express.static(path.join(__dirname, 'public')))
 app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
@@ -29,6 +33,7 @@ app.use(session({
     })
 }))
 app.use(passUserToView)
+app.use('/listings', listingsController)
 
 app.get('/', (req, res) => {
     res.render('index.ejs', { title: 'my App'})
