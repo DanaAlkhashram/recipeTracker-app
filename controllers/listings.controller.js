@@ -23,46 +23,52 @@ router.post('/', isSignedIn, async (req, res) => {
 
 // VIEW ALL LISTINGS
 router.get('/', async (req, res) => {
-  try {
-    const foundrecipes = await Recipe.find()
-    res.render('recipes/index.ejs', { foundrecipes: foundrecipes })
-  } catch (err) {
-    console.log(err)
-    res.send('Something went wrong')
-  }
+    try {
+        const foundrecipes = await Recipe.find()
+        res.render('recipes/index.ejs', { foundrecipes: foundrecipes })
+    } catch (err) {
+        console.log(err)
+        res.send('Something went wrong')
+    }
 })
 
 // VIEW A SINGLE LISTING
 router.get('/:recipeId', async (req, res) => {
-  try {
-    const foundrecipes = await Recipe.findById(req.params.recipeId).populate('chef')
-    res.render('recipes/show.ejs', { foundrecipes})
-  } catch (error) {
-    console.log(error)
-    res.redirect('/recipes')
-  }
+    try {
+        const foundrecipes = await Recipe.findById(req.params.recipeId).populate('chef')
+        res.render('recipes/show.ejs', { foundrecipes })
+    } catch (error) {
+        console.log(error)
+        res.redirect('/recipes')
+    }
 })
 
 // DELETE LISTING FROM DATABASE
 router.delete('/:recipeId', isSignedIn, async (req, res) => {
-  const foundrecipes = await Recipe.findById(req.params.recipeId).populate('chef')
+    const foundrecipes = await Recipe.findById(req.params.recipeId).populate('chef')
 
-  if (foundrecipes.chef._id.equals(req.session.user._id)) {
-    await foundrecipes.deleteOne()
-    return res.redirect('/recipes')
-  }
-  return res.send('Not authorized')
+    if (foundrecipes.chef._id.equals(req.session.user._id)) {
+        await foundrecipes.deleteOne()
+        return res.redirect('/recipes')
+    }
+    return res.send('Not authorized')
 })
 
 // RENDER THE EDIT FORM VIEW
 router.get('/:recipeId/edit', isSignedIn, async (req, res) => {
-  const foundrecipes = await Recipe.findById(req.params.recipeId).populate('chef')
+    try {
+        const foundrecipes = await Recipe.findById(req.params.recipeId).populate('chef')
 
-  if (foundrecipes.chef._id.equals(req.session.user._id)) {
-    res.render('recipes/edit.ejs', { foundrecipes})
-  }
-  return res.send('Not authorized')
+        if (foundrecipes.chef._id.equals(req.session.user._id)) {
+            res.render('recipes/edit.ejs', { foundrecipes: foundrecipes })
+        }
+    } catch (err) {
+        console.log(err)
+        return res.send('Not authorized')
+    }
+
 })
+
 
 
 module.exports = router
