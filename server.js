@@ -33,7 +33,7 @@ app.use(session({
     })
 }))
 app.use(passUserToView)
-app.use('/listings', listingsController)
+app.use('/recipes', listingsController)
 
 app.get('/', (req, res) => {
     res.render('index.ejs', { title: 'my App'})

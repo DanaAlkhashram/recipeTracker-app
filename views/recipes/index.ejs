@@ -1,0 +1,29 @@
+<%- include('../partials/head') %>
+
+<div class="container mt-4">
+  <h1 class="text-center mb-4">Recipes Tracker</h1>
+
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    <% foundrecipes.forEach((recipe) => { %>
+      <div class="col">
+        <div class="card h-100">
+          <img src="<%= recipe.image %>" class="card-img-top" alt="Image of <%= recipe.title %>">
+          <div class="card-body">
+            <h5>
+              <a href="/recipes/<%= recipe._id %>" class="card-link"><%= recipe.title %>
+                </a>
+            </h5>
+            <p class="card-text"><%= recipe.ingredients %></p>
+            <p class="card-text"><strong><%= recipe.steps %> </strong></p>
+
+            <!-- Button to view listing will be broken until next section -->
+            <!-- <a href="/listings/<%= recipe._id %>" class="card-link">View recipe</a> -->
+          </div>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+</div>
+
+</body>
+</html>

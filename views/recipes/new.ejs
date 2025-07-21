@@ -1,6 +1,6 @@
 <%- include('../partials/head') %>
 
-    <form action="/listings" method="POST" class="container mt-4" style="max-width: 600px;">
+    <form action="/recipes" method="POST" class="container mt-4" style="max-width: 600px;">
         <h2 class="mb-4">Create a New Recipe </h2>
 
         <div class="mb-3">
@@ -9,13 +9,14 @@
         </div>
 
         <div class="mb-3">
-            <label for="description" class="form-label">Description:</label>
-            <textarea name="description" id="description" class="form-control" rows="3" required></textarea>
+            <label for="ingredients" class="form-label">Ingredients:</label>
+            <input type="text" name="ingredients" id="ingredients" class="form-control" min="0" row="2" required />
         </div>
 
         <div class="mb-3">
             <label for="steps" class="form-label">Steps:</label>
-            <input type="text" name="steps" id="steps" class="form-control" min="0" required />
+            <textarea name="steps" id="steps" class="form-control" rows="2" required></textarea>
+
         </div>
 
         <div class="mb-3">
@@ -25,6 +26,6 @@
 
         <button type="submit" class="btn btn-primary">Create Recipe</button>
     </form>
-</body>
+    </body>
 
-</html>
+    </html>

@@ -1,9 +1,9 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-const listingSchema = new Schema({
+const recipelSchema = new Schema({
     title: String,
-    description: String,
+    ingredients: String,
     steps: String,
     image: String,
     chef: {
@@ -12,4 +12,4 @@ const listingSchema = new Schema({
     }
 }, { timestamps: true })
 
-module.exports = mongoose.model('Listing', listingSchema)
+module.exports = mongoose.model('Recipe', recipelSchema)
