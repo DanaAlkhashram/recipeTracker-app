@@ -1,27 +1,26 @@
 <%- include('../partials/head') %>
 
-    <form action="/recipes" method="POST" class="container mt-4" style="max-width: 600px;">
+    <form action="/recipes/<%= foundrecipe._id %>?_method=PUT" method="POST" class="container mt-4" style="max-width: 600px;">
         <h2 class="mb-4">Create a New Recipe </h2>
-
         <div class="mb-3">
             <label for="title" class="form-label">Title:</label>
-            <input type="text" name="title" id="title" value="<%= foundrecipes.title %>" class="form-control" required />
+            <input type="text" name="title" id="title" value="<%= foundrecipe.title %>" class="form-control" required />
         </div>
 
         <div class="mb-3">
             <label for="ingredients" class="form-label">Ingredients:</label>
-            <input type="text" name="ingredients" id="ingredients" value="<%= foundrecipes.ingredients %>" class="form-control" min="0" row="2" required />
+            <input type="text" name="ingredients" id="ingredients" value="<%= foundrecipe.ingredients %>" class="form-control" min="0" row="2" required />
         </div>
 
         <div class="mb-3">
             <label for="steps" class="form-label">Steps:</label>
-            <textarea name="steps" id="steps" class="form-control" rows="2" required><%= foundrecipes.steps %></textarea>
+            <textarea name="steps" id="steps" class="form-control" rows="2" required><%= foundrecipe.steps %></textarea>
 
         </div>
 
         <div class="mb-3">
             <label for="image" class="form-label">Image URL</label>
-            <input type="text" name="image" id="image" value="<%= foundrecipes.image %>"class="form-control" />
+            <input type="text" name="image" id="image" value="<%= foundrecipe.image %>"class="form-control" />
         </div>
 
         <button type="submit" class="btn btn-primary">Eit Recipe</button>

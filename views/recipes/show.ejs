@@ -2,27 +2,27 @@
 
   <div class="container mt-4" style="max-width: 700px;">
     <h2 class="text-center mb-3">
-      <%= foundrecipes.title %>
+      <%= foundrecipe.title %>
     </h2>
 
-    <img src="<%= foundrecipes.image %>" class="img-fluid rounded mb-3" alt="Image of <%= foundrecipes.title %>">
+    <img src="<%= foundrecipe.image %>" class="img-fluid rounded mb-3" alt="Image of <%= foundrecipe.title %>">
 
     <p ><strong>Ingredients:</strong>
-      <%= foundrecipes.ingredients %>
+      <%= foundrecipe.ingredients %>
     </p>
     <p><strong>Steps:</strong>
-      <%= foundrecipes.steps %>
+      <%= foundrecipe.steps %>
     </p>
     <p><strong>Chef:</strong>
-      <%= foundrecipes.chef.username %>
+      <%= foundrecipe.chef.username %>
     </p>
 
     <a href="/recipes" class="btn btn-secondary mt-3">Back to Recipes</a>
-    <% if (foundrecipes.chef._id.equals(user._id)) { %>
-      <form action="/recipes/<%= foundrecipes._id %>?_method=DELETE" method="POST">
+    <% if (foundrecipe.chef._id.equals(user._id)) { %>
+      <form action="/recipes/<%= foundrecipe._id %>?_method=DELETE" method="POST">
         <button type="submit" class="btn btn-danger">Delete</button>
       </form>
-      <a href="/recipes/<%= foundrecipes._id %>/edit" class="btn btn-warning">Edit</a>
+      <a href="/recipes/<%= foundrecipe._id %>/edit" class="btn btn-warning">Edit</a>
       <% } %>
   </div>
 
