@@ -35,8 +35,8 @@ router.get('/', async (req, res) => {
 // VIEW A SINGLE LISTING
 router.get('/:recipeId', async (req, res) => {
     try {
-        const foundrecipe = await Recipe.findById(req.params.recipeId).populate('chef')
-        res.render('recipes/show.ejs', { foundrecipe })
+        const foundrecipe = await Recipe.findById(req.params.recipeId).populate('chef').populate('comments.author')
+        res.render('recipes/show.ejs', { foundrecipe: foundrecipe })
     } catch (error) {
         console.log(error)
         res.redirect('/recipes')
@@ -86,13 +86,49 @@ router.put('/:recipeId', isSignedIn, async (req, res) => {
 
 // POST COMMENT FORM TO THE DATABASE
 router.post('/:recipeId/comments', isSignedIn, async (req, res) => {
-    const foundrecipe = await Recipe.findById(req.params.recipeId)
+    const foundrecipe = await Recipe.findById(req.params.recipeId).populate('chef').populate('comments.author')
     req.body.author = req.session.user._id
-    // console.log(req.body)
+
     foundrecipe.comments.push(req.body)
     await foundrecipe.save()
     res.redirect(`/recipes/${req.params.recipeId}`)
 })
+
+router.put('/:recipeId/comments/:commentId', isSignedIn, async (req, res) => {
+    try {
+        const foundrecipe = await Recipe.findById(req.params.recipeId).populate('comments.author')
+        const comment = foundrecipe.comments.id(req.params.commentId)
+
+        if (comment.author.equals(req.session.user._id)) {
+            comment.content = req.body.content
+            await foundrecipe.save()
+            res.redirect(`/recipes/${req.params.recipeId}`)
+        }
+    } catch (err) {
+        console.log(err)
+        return res.send('Not authorized')
+
+    }
+})
+
+router.delete('/:recipeId/comments/:commentId', isSignedIn, async (req, res) => {
+    try {
+        const foundrecipe = await Recipe.findById(req.params.recipeId).populate('comments.author')
+        const comment = foundrecipe.comments.id(req.params.commentId);
+        if (!comment) {
+            return res.send('Comment not found');
+        }
+        if (comment.author.equals(req.session.user._id)) {
+            comment.deleteOne()
+            await foundrecipe.save()
+            res.redirect(`/recipes/${req.params.recipeId}`)
+        }
+    } catch (err) {
+        console.log(err)
+        return res.send('Not authorized')
+    }
+})
+
 
 
 module.exports = router
