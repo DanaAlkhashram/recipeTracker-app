@@ -15,7 +15,7 @@ This app was created to make sharing and discovering easy recipes fun and access
 
 👉 **Try it here (Heroku):** [https://cookhouse-app-d8cb76aa868e.herokuapp.com/](https://cookhouse-app-d8cb76aa868e.herokuapp.com/)
 
-
+g
 👉 **Planning Materials:**
 - [User Stories](./planning/user-stories.md)
 - [Wireframe](./planning/wireframe.png)
@@ -29,9 +29,14 @@ This app was created to make sharing and discovering easy recipes fun and access
 
 ## 💡 Technologies Used
 
-- HTML  
-- CSS  
-- JavaScript  
+- HTML, CSS, JavaScript
+- MongoDB
+- Express.js
+- EJS
+- Node.js
+- Express-Session
+- Method-Override
+- Bootstrap 
 
 ## 📚 Attributions
 
