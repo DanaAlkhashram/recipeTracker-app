@@ -13,7 +13,7 @@ From creamy pasta to refreshing smoothies, Cookhouse makes home cooking fun and 
 This app was created to make sharing and discovering easy recipes fun and accessible for everyone
 ## 🚀 Getting Started
 
-👉 **Try it here (Heroku):** [https://your-heroku-app-name.herokuapp.com](https://your-heroku-app-name.herokuapp.com)
+👉 **Try it here (Heroku):** [https://cookhouse-app-d8cb76aa868e.herokuapp.com/](https://cookhouse-app-d8cb76aa868e.herokuapp.com/)
 
 
 👉 **Planning Materials:**
