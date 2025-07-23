@@ -1,53 +1,69 @@
 <%- include('../partials/head') %>
 
-        <form action="/recipes/<%= foundrecipe._id %>?_method=PUT" method="POST" class="container mt-4"
-            style="max-width: 700px;">
-            <h2 class="mb-4">Edit a Recipe</h2>
+<form action="/recipes/<%= foundrecipe._id %>?_method=PUT" method="POST" class="container mt-4" style="max-width: 700px;">
+  <h2 class="mb-4">Edit a Recipe</h2>
 
-            <div class="row mb-3 align-items-center">
-                <label for="title" class="col-sm-2 col-form-label">Title:</label>
-                <div class="col-sm-10">
-                    <input type="text" name="title" id="title" value="<%= foundrecipe.title %>" class="form-control"
-                        required>
-                </div>
-            </div>
+  <div class="row mb-3 align-items-center">
+    <label for="title" class="col-sm-2 col-form-label">Title:</label>
+    <div class="col-sm-10">
+      <input 
+        type="text" 
+        name="title" 
+        id="title" 
+        value="<%= foundrecipe.title %>" 
+        class="form-control" 
+        required 
+        placeholder="Recipe title" 
+      />
+    </div>
+  </div>
 
-            <div class="row mb-3 align-items-center">
-                <label for="ingredients" class="col-sm-2 col-form-label">Ingredients:</label>
-                <div class="col-sm-10">
-                    <input type="text" name="ingredients" id="ingredients" value="<%= foundrecipe.ingredients %>"
-                        class="form-control" required>
-                </div>
-            </div>
+  <div class="row mb-3 align-items-center">
+    <label for="ingredients" class="col-sm-2 col-form-label">Ingredients:</label>
+    <div class="col-sm-10">
+      <textarea 
+        name="ingredients" 
+        id="ingredients" 
+        rows="4" 
+        class="form-control" 
+        required 
+        placeholder="List ingredients separated by commas or new lines"
+      ><%= foundrecipe.ingredients %></textarea>
+    </div>
+  </div>
 
-            <div class="row mb-3 align-items-center">
-                <label for="steps" class="col-sm-2 col-form-label">Steps:</label>
-                <div class="col-sm-10">
-                    <textarea name="steps" id="steps" rows="3" class="form-control"
-                        required><%= foundrecipe.steps %></textarea>
-                </div>
-            </div>
+  <div class="row mb-3 align-items-center">
+    <label for="steps" class="col-sm-2 col-form-label">Steps:</label>
+    <div class="col-sm-10">
+      <textarea 
+        name="steps" 
+        id="steps" 
+        rows="5" 
+        class="form-control" 
+        required 
+        placeholder="Step-by-step instructions"
+      ><%= foundrecipe.steps %></textarea>
+    </div>
+  </div>
 
-            <div class="row mb-3 align-items-center">
-                <label for="image" class="col-sm-2 col-form-label">Image URL:</label>
-                <div class="col-sm-10">
-                    <input type="text" name="image" id="image" value="<%= foundrecipe.image %>" class="form-control">
-                </div>
-            </div>
+  <div class="row mb-3 align-items-center">
+    <label for="image" class="col-sm-2 col-form-label">Image URL:</label>
+    <div class="col-sm-10">
+      <input 
+        type="url" 
+        name="image" 
+        id="image" 
+        value="<%= foundrecipe.image %>" 
+        class="form-control" 
+        placeholder="https://example.com/image.jpg" 
+      />
+    </div>
+  </div>
 
-            <div class="text-end">
-                <button type="submit"  class="btn btn-outline-secondary">Update Recipe</button>
-            </div>
-        </form>
+  <div class="text-end">
+    <button type="submit" class="btn btn-outline-secondary">Update Recipe</button>
+  </div>
+</form>
 
-        <!-- 
-        <div class="mb-3">
-            <label for="image" class="form-label">Upload an Image</label>
-            <input type="file" accept="image/*" name="image" id="image" class="form-control"
-                value="<%= foundrecipe.image %>" required />
-        </div> -->
-
-    
-    </body>
-
-    </html>
+</body>
+</html>
