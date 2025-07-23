@@ -1,19 +1,24 @@
 <%- include('./partials/head') %>
 
 <% if (user) { %>
-<h1>Welcome to the app, <%= user.username %>!</h1>
+<h1>Welcome to the Cookhouse, <%= user.username %>!</h1>
+
 <!-- <a href="/auth/sign-out">Sign out</a>
 <a class="nav-link" href="/recipes/new">Add a Recipe</a>
 <a class="nav-link" href="/recipes">View All recipes</a> -->
-
-
 <% } else { %>
 <h1>Welcome to the app, guest.</h1>
 <p>
   <a href="/auth/sign-up">Sign up</a> or <a href="/auth/sign-in">sign in</a>.
-   
-
 </p>
 <% } %>
+<div class="card text-bg-dark">
+<img src="/assets/cookhouse.jpg" class="card-img" alt="">
+  <div class="card-img-overlay">
+    <p class="card-text">The best recipes are written with patience and served with heart.</p>
+    <p class="card-text"><small>A kitchen isn’t just a place to cook — it’s a place to connect.</small></p>
+  </div>
+</div>
+
 </body>
 </html>

@@ -14,7 +14,7 @@ const recipelSchema = new mongoose.Schema({
     title: String,
     ingredients: String,
     steps: String,
-    image: String,
+    image:String,
     chef: {
         type: Schema.Types.ObjectId,
         ref: 'User'

@@ -36,6 +36,7 @@ app.use(passUserToView)
 app.use('/recipes', listingsController)
 
 app.get('/', (req, res) => {
+    
     res.render('index.ejs', { title: 'my App'})
 })
 

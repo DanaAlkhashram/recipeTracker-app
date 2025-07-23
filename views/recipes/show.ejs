@@ -1,5 +1,7 @@
 <%- include('../partials/head') %>
 
+
+
   <div class="container mt-4" style="max-width: 700px;">
     <h2 class="text-center mb-3">
       <%= foundrecipe.title %>
@@ -32,27 +34,61 @@
           </div>
           <button type="submit" class="btn btn-primary">Post Comment</button>
         </form>
-           <h3 class="text-center">Comments</h3>
-<ul class="list-group">
-  <% foundrecipe.comments.forEach((comment) => { %>
-    <li class="list-group-item">
-      <%= comment.content %> — <em><%= comment.author.username %></em>
 
-      <% if (comment.author._id.equals(user._id)) { %>
-        <!-- Edit Form -->
-        <form action="/recipes/<%= foundrecipe._id %>/comments/<%= comment._id %>?_method=PUT" method="POST" class="mt-2">
-          <input type="text" name="content" value="<%= comment.content %>" class="form-control mb-2" required />
-          <button class="btn btn-warning btn-sm" type="submit">Update</button>
-        </form>
+        <ul class="comments-list">
+          <% foundrecipe.comments.forEach((comment)=> { %>
+            <li class="comment-item">
+              <div class="comment-text">
+                <strong>
+                  <%= comment.author.username %>:
+                </strong>
+                <%= comment.content %>
+              </div>
 
-        <!-- Delete Form -->
-        <form action="/recipes/<%= foundrecipe._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST" class="mt-2">
-          <button class="btn btn-danger btn-sm">Delete</button>
-        </form>
-      <% }}) %>
-    </li>
-  </div>
+              <% if (comment.author._id.equals(user._id)) { %>
+                <div class="comment-actions-inline">
+                  <button class="btn btn-sm btn-warning edit-btn" type="button"
+                    data-comment-id="<%= comment._id %>">Edit</button>
+                  <form action="/recipes/<%= foundrecipe._id %>/comments/<%= comment._id %>?_method=DELETE"
+                    method="POST" class="delete-form-inline" style="display:inline;">
+                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                  </form>
+                </div>
 
-  </body>
+                <form action="/recipes/<%= foundrecipe._id %>/comments/<%= comment._id %>?_method=PUT" method="POST"
+                  class="edit-form-inline" id="edit-form-<%= comment._id %>" style="display:none; margin-top:8px;">
+                  <input type="text" name="content" value="<%= comment.content %>" required />
+                  <button type="submit" class="btn btn-sm btn-success">Save</button>
+                  <button type="button" class="btn btn-sm btn-secondary cancel-btn"
+                    data-comment-id="<%= comment._id %>">Cancel</button>
+                </form>
+                <% } %>
+            </li>
+            <% }) %>
+        </ul>
+        <script>
+          document.querySelectorAll('.edit-btn').forEach(button => {
+            button.addEventListener('click', () => {
+              const commentId = button.getAttribute('data-comment-id')
+              const editForm = document.getElementById(`edit-form-${commentId}`)
+              if (editForm.style.display === 'none' || editForm.style.display === '') {
+                editForm.style.display = 'flex'
+                button.style.display = 'none'
+              }
+            })
+          })
 
-  </html>
+          document.querySelectorAll('.cancel-btn').forEach(button => {
+            button.addEventListener('click', () => {
+              const commentId = button.getAttribute('data-comment-id')
+              const editForm = document.getElementById(`edit-form-${commentId}`)
+              const editBtn = document.querySelector(`.edit-btn[data-comment-id="${commentId}"]`)
+              editForm.style.display = 'none'
+              if (editBtn) editBtn.style.display = 'inline-block'
+            })
+          })
+        </script>
+
+        </body>
+
+        </html>

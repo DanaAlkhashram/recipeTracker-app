@@ -2,6 +2,8 @@ const express = require('express')
 const router = express.Router()
 const isSignedIn = require('../middleware/is-signed-in')
 const Recipe = require('../models/listing')
+// const upload = require('../config/multer')
+// const cloudinary = require('../config/cloudinary')
 
 // NEW LISTING FORM
 router.get('/new', isSignedIn, (req, res) => {
